@@ -5,6 +5,8 @@ import com.rubenialima.place_service.domain.Place;
 import com.rubenialima.place_service.domain.PlaceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -19,7 +21,8 @@ public class PlaceController {
         this.placeService = placeService;
     }
 
-    public ResponseEntity<Mono<Place>> crete(Place place){
+    @PostMapping
+    public ResponseEntity<Mono<Place>> crete(@RequestBody Place place){
         var createPlace = placeService.create(place);
         return ResponseEntity.status(HttpStatus.CREATED).body(createPlace);
     }
