@@ -1,6 +1,8 @@
 package com.rubenialima.place_service.web;
 
 
+import com.rubenialima.place_service.api.PlaceRequest;
+import com.rubenialima.place_service.api.PlaceResponse;
 import com.rubenialima.place_service.domain.Place;
 import com.rubenialima.place_service.domain.PlaceService;
 import org.springframework.http.HttpStatus;
@@ -22,8 +24,8 @@ public class PlaceController {
     }
 
     @PostMapping
-    public ResponseEntity<Mono<Place>> crete(@RequestBody Place place){
-        var createPlace = placeService.create(place);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createPlace);
+    public ResponseEntity<Mono<PlaceResponse>> crete(@RequestBody PlaceRequest request){
+        var placeResponse = placeService.create(request).map(PlaceMapper::fromPlaceToResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(placeResponse);
     }
 }
