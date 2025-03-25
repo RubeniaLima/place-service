@@ -12,6 +12,6 @@ public record Place (
         String name,
         String slug,
         String state,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt){
+        @CreatedDate LocalDateTime createdAt,
+        @LastModifiedDate LocalDateTime updatedAt){
 }
